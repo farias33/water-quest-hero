@@ -10,7 +10,7 @@ import { AchievementBadge } from "@/components/AchievementBadge";
 import { WaterDropAnimation } from "@/components/WaterDropAnimation";
 import { Settings, Award, TrendingUp, Calendar, Crown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { SettingsDialog } from "@/components/SettingsDialog";
+import { WaterGoalButton } from "@/components/WaterGoalButton";
 
 const Index = () => {
   const { toast } = useToast();
@@ -27,7 +27,7 @@ const Index = () => {
     weekStreak: false,
     level10: false,
   });
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  
 
   const xpForNextLevel = level * 100;
 
@@ -96,13 +96,10 @@ const Index = () => {
             <Button variant="outline" size="icon" className="relative">
               <Award className="w-5 h-5" />
             </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => setSettingsOpen(true)}
-            >
-              <Settings className="w-5 h-5" />
-            </Button>
+            <WaterGoalButton
+              dailyGoal={dailyGoal}
+              onDailyGoalChange={setDailyGoal}
+            />
           </div>
         </div>
       </div>
@@ -212,12 +209,6 @@ const Index = () => {
         </Card>
       </div>
 
-      <SettingsDialog
-        open={settingsOpen}
-        onOpenChange={setSettingsOpen}
-        dailyGoal={dailyGoal}
-        onDailyGoalChange={setDailyGoal}
-      />
     </div>
   );
 };
